@@ -37,6 +37,7 @@ screenshots/
 # Maven #
 #########
 **/target/*
+build
 
 # Other IDE's#
 ##############
