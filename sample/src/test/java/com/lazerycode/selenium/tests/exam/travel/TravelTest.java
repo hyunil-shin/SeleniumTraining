@@ -74,6 +74,15 @@ public class TravelTest extends DriverBase {
 		nav2.findElement(By.partialLinkText("HOTELS")).click();
 		String curUrl = driver.getCurrentUrl();
 		assertThat(curUrl).isEqualTo("http://www.phptravels.net/hotels");
+
+		findCss("#body-section > div.header-mob.mt-25 > div > div > div:nth-child(6) > div > a").click();
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+		WebElement d = findCss("#dpd2 > input");
+        wait.until(ExpectedConditions.visibilityOf(d));
+		d.clear();
+		d.sendKeys("23/12/2017");
+		findCss("#modify > div.container > div > form > div.row > div.bgfade.col-md-4.col-xs-12 > button").click();
+		
 	}
 	
 	WebElement findCss(String css) {
