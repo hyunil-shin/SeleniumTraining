@@ -11,6 +11,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class WaitTest2 extends DriverBase {
@@ -45,4 +46,23 @@ public class WaitTest2 extends DriverBase {
             }
         });
     }
+    
+    @Test
+    // same as willPass()
+    public void willPass2() throws Exception {
+        WebElement element = driver.findElement(By.cssSelector("#start > button"));
+        element.click();
+       (new WebDriverWait(driver, 10)).until(
+    		   	ExpectedConditions.textToBePresentInElementLocated(By.cssSelector("#finish > h4"), "Hello"));
+    }
+  
+    @Test
+    public void timeout() throws Exception {
+        WebElement element = driver.findElement(By.cssSelector("#start > button"));
+        element.click();
+       (new WebDriverWait(driver, 2)).until(
+    		   	ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#finish > h4")));
+    }
+
+
 }
