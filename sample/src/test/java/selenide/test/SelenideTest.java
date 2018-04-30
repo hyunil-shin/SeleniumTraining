@@ -46,6 +46,12 @@ public class SelenideTest {
 		$(By.xpath("//button[contains(.,'Login')]")).click();
 		SelenideElement welcomMsg = $(By.cssSelector("#body-section > div > div.row > div > div.col-md-6.go-right.RTL > h3"));
 		welcomMsg.should(text("Hi,"));
+		
+	
+		// move to hotel page
+		$("#offcanvas-menu").find(By.partialLinkText("HOTELS")).click();
+		String url = WebDriverRunner.getWebDriver().getCurrentUrl();
+		assertThat(url).isEqualTo("http://www.phptravels.net/hotels");
 	}
 	
 }
