@@ -34,41 +34,18 @@ public class SelenideTest {
 	public void setup() throws Exception {
 	}
 	
-
-	/**
-	 * -> 로그인 (user@phptravels.com, demouser)
-	 * -> HOTELS
-	 * -> Swissotel Le Plaza Basel (any hotel)
-	 * -> Delux Room (any type)
-	 * -> No. Rooms 2
-	 * -> Book Now
-	 * -> Extra 모두 Yes
-	 * -> No Coupon
-	 * -> Pay on Arrival
-	 * -> 확인
-	 *    - Reserved message
-	 *    - Total $346,50
-	 * @throws InterruptedException 
-	 */
 	@Test
 	public void reserveHotel() throws Exception {
-		
-		SelenideElement nav = $("div.navbar.navbar-static-top.navbar-default").should(visible);
+	
+		// login
+		SelenideElement nav = $(".tbar-top").should(visible);
 		nav.$("#li_myaccount").click();
 		nav.$("#li_myaccount > ul > li:nth-child(1) > a").click();
-
 		$(By.name("username")).sendKeys(username);
 		$(By.name("password")).sendKeys(pw);
 		$(By.xpath("//button[contains(.,'Login')]")).click();
-		
-		// login 확인
-		$("#body-section > div > div.row > div > div.col-md-6.go-right.RTL > h3").should(text("Hi, Johny Smith"));
-		
-		// hotel 예약으로 이동
-		SelenideElement nav2 = $("nav.navbar.navbar-default.navbar-orange.hidden-xs");
-		nav2.findElement(By.partialLinkText("HOTELS")).click();
-		WebDriver driver = WebDriverRunner.getWebDriver();
-		assertThat(driver.getCurrentUrl()).isEqualTo("http://www.phptravels.net/hotels");
+		SelenideElement welcomMsg = $(By.cssSelector("#body-section > div > div.row > div > div.col-md-6.go-right.RTL > h3"));
+		welcomMsg.should(text("Hi,"));
 	}
 	
 }
