@@ -18,7 +18,6 @@ public class RetryTest extends DriverBase {
     @Test
 	public void test() throws Exception {
         
-        // Alternatively the same thing can be done like this
     	String a = RandomStringUtils.randomNumeric(1, 3);
     	System.out.println("a: " + a);
     	if(a.length() == 1) {
