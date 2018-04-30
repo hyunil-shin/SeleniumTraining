@@ -21,7 +21,7 @@ public class Selectors extends DriverBase {
         WebDriver driver = getDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.get(TestProperties.test_url + "/tables");
-       
+        System.out.println(driver.getCurrentUrl());
         
         // 방법 1. css selector
         WebElement element = driver.findElement(By.cssSelector("#table1 > thead > tr > th.header > span"));
