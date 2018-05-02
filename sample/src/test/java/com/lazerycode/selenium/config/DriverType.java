@@ -13,6 +13,8 @@ import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.safari.SafariDriver;
 
+import com.lazerycode.selenium.tests.TestProperties;
+
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -52,8 +54,7 @@ public enum DriverType implements DriverSetup {
             
             if(System.getProperty("webdriver.chrome.driver") == null) {
             	// for Eclipse
-            	String chrome_driver_path = this.getDeclaringClass().getClassLoader().getResource(
-            						"selenium_standalone_binaries//windows//googlechrome//64bit//chromedriver.exe").getPath();
+            	String chrome_driver_path = this.getDeclaringClass().getClassLoader().getResource(TestProperties.chrome_driver_path).getPath();
             	try {
 					chrome_driver_path = java.net.URLDecoder.decode(chrome_driver_path, "UTF-8");
 				} catch (UnsupportedEncodingException e) {
