@@ -16,7 +16,7 @@
             </version>
         </driver>
         <driver id="googlechrome">
-            <version id="2.33">
+            <version id="2.38">
                 <bitrate thirtytwobit="true" sixtyfourbit="true">
                     <filelocation>https://chromedriver.storage.googleapis.com/2.38/chromedriver_win32.zip</filelocation>
                     <hash>dd3fa3caf72bbb42fefc8987a5c8b8dd</hash>
@@ -29,7 +29,7 @@
     </linux>
     <osx>
         <driver id="googlechrome">
-            <version id="2.28">
+            <version id="2.38">
                 <bitrate sixtyfourbit="true">
                     <filelocation>https://chromedriver.storage.googleapis.com/2.38/chromedriver_mac64.zip</filelocation>
                     <hash>fdab4d198278cb1a2bd7ac7441cc16a6</hash>
