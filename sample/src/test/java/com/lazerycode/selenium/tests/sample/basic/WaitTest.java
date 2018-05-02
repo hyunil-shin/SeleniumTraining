@@ -10,41 +10,41 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class WaitTest extends DriverBase {
-
+   
+    
     @Test
     public void willFailWhenNoWait() throws Exception {
         WebDriver driver = getDriver();
 
-        driver.get("http://www.google.com");
+        driver.get("https://www.github.com");
 
         WebElement element = driver.findElement(By.name("q"));
         element.clear();
-        element.sendKeys("Milk!");
+        element.sendKeys("selenium");
         element.submit();
 
         System.out.println("Page title is: " + driver.getTitle());
 
-        // expected: Milk - Wikipedia 
-        WebElement r = driver.findElement(By.xpath(".//*[@id='rso']/div/div/div[3]/div/div/h3"));
+        WebElement r = driver.findElement(By.xpath("//*[@id='js-pjax-container']/div/div[1]/div[1]/nav/a[3]/span"));
         System.out.println("result: " + r.getText());
     }
     
-     @Test
+    @Test
     public void willPass() throws Exception {
         WebDriver driver = getDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.get("http://www.google.com");
+
+        driver.get("https://www.github.com");
 
         WebElement element = driver.findElement(By.name("q"));
         element.clear();
-        element.sendKeys("Milk!");
+        element.sendKeys("selenium");
         element.submit();
 
-        // Check the title of the page
         System.out.println("Page title is: " + driver.getTitle());
-       
-        // expected: Milk - Wikipedia 
-        WebElement r = driver.findElement(By.xpath(".//*[@id='rso']/div/div/div[3]/div/div/h3"));
+
+        WebElement r = driver.findElement(By.xpath("//*[@id='js-pjax-container']/div/div[1]/div[1]/nav/a[3]/span"));
         System.out.println("result: " + r.getText());
     }
-}
+    
+ }
