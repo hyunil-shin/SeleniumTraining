@@ -2,24 +2,22 @@ package com.lazerycode.selenium.config;
 
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.Proxy;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import static com.lazerycode.selenium.config.DriverType.CHROME;
+import static com.lazerycode.selenium.config.DriverType.FIREFOX;
 import static com.lazerycode.selenium.config.DriverType.valueOf;
 import static org.openqa.selenium.Proxy.ProxyType.MANUAL;
+import static org.openqa.selenium.remote.CapabilityType.PROXY;
 
 public class DriverFactory {
 
-    private WebDriver webdriver;
+    private RemoteWebDriver driver;
     private DriverType selectedDriverType;
 
-    private final DriverType defaultDriverType = CHROME;
-    private final String browser = System.getProperty("browser", defaultDriverType.toString()).toUpperCase();
     private final String operatingSystem = System.getProperty("os.name").toUpperCase();
     private final String systemArchitecture = System.getProperty("os.arch");
     private final boolean useRemoteWebDriver = Boolean.getBoolean("remoteDriver");
@@ -28,31 +26,9 @@ public class DriverFactory {
     private final Integer proxyPort = Integer.getInteger("proxyPort");
     private final String proxyDetails = String.format("%s:%d", proxyHostname, proxyPort);
 
-    public WebDriver getDriver() throws Exception {
-        if (null == webdriver) {
-            Proxy proxy = null;
-            if (proxyEnabled) {
-                proxy = new Proxy();
-                proxy.setProxyType(MANUAL);
-                proxy.setHttpProxy(proxyDetails);
-                proxy.setSslProxy(proxyDetails);
-            }
-            determineEffectiveDriverType();
-            DesiredCapabilities desiredCapabilities = selectedDriverType.getDesiredCapabilities(proxy);
-            instantiateWebDriver(desiredCapabilities);
-        }
-
-        return webdriver;
-    }
-
-    public void quitDriver() {
-        if (null != webdriver) {
-            webdriver.quit();
-        }
-    }
-
-    private void determineEffectiveDriverType() {
-        DriverType driverType = defaultDriverType;
+    public DriverFactory() {
+        DriverType driverType = FIREFOX;
+        String browser = System.getProperty("browser", driverType.toString()).toUpperCase();
         try {
             driverType = valueOf(browser);
         } catch (IllegalArgumentException ignored) {
@@ -63,15 +39,45 @@ public class DriverFactory {
         selectedDriverType = driverType;
     }
 
-    private void instantiateWebDriver(DesiredCapabilities desiredCapabilities) throws MalformedURLException {
+    public RemoteWebDriver getDriver() throws Exception {
+        if (null == driver) {
+            instantiateWebDriver(selectedDriverType);
+        }
+
+        return driver;
+    }
+
+    public RemoteWebDriver getStoredDriver() {
+        return driver;
+    }
+
+    public void quitDriver() {
+        if (null != driver) {
+            driver.quit();
+            driver = null;
+        }
+    }
+
+    private void instantiateWebDriver(DriverType driverType) throws MalformedURLException {
+        //TODO add in a real logger instead of System.out
         System.out.println(" ");
-        System.out.println("Current Operating System: " + operatingSystem);
-        System.out.println("Current Architecture: " + systemArchitecture);
-        System.out.println("Current Browser Selection: " + selectedDriverType);
+        System.out.println("Local Operating System: " + operatingSystem);
+        System.out.println("Local Architecture: " + systemArchitecture);
+        System.out.println("Selected Browser: " + selectedDriverType);
+        System.out.println("Connecting to Selenium Grid: " + useRemoteWebDriver);
         System.out.println(" ");
 
+        DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
+
+        if (proxyEnabled) {
+            Proxy proxy = new Proxy();
+            proxy.setProxyType(MANUAL);
+            proxy.setHttpProxy(proxyDetails);
+            proxy.setSslProxy(proxyDetails);
+            desiredCapabilities.setCapability(PROXY, proxy);
+        }
+
         if (useRemoteWebDriver) {
-        	System.out.println("Remote Web Driver");
             URL seleniumGridURL = new URL(System.getProperty("gridURL"));
             String desiredBrowserVersion = System.getProperty("desiredBrowserVersion");
             String desiredPlatform = System.getProperty("desiredPlatform");
@@ -84,10 +90,10 @@ public class DriverFactory {
                 desiredCapabilities.setVersion(desiredBrowserVersion);
             }
 
-            webdriver = new RemoteWebDriver(seleniumGridURL, desiredCapabilities);
+            desiredCapabilities.setBrowserName(selectedDriverType.toString());
+            driver = new RemoteWebDriver(seleniumGridURL, desiredCapabilities);
         } else {
-        	System.out.println("Local Web Driver");
-            webdriver = selectedDriverType.getWebDriverObject(desiredCapabilities);
+            driver = driverType.getWebDriverObject(desiredCapabilities);
         }
     }
 }
