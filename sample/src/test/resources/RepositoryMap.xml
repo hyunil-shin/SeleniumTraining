@@ -24,6 +24,20 @@
                 </bitrate>
             </version>
         </driver>
+        <driver id="marionette">
+            <version id="0.21.0">
+                <bitrate sixtyfourbit="true">
+                    <filelocation>https://github.com/mozilla/geckodriver/releases/download/v0.21.0/geckodriver-v0.21.0-win64.zip</filelocation>
+                    <hash>e96a24cf4147d6571449bdd279be65a5e773ba4c</hash>
+                    <hashtype>sha1</hashtype>
+                </bitrate>
+                <bitrate thirtytwobit="true">
+                    <filelocation>https://github.com/mozilla/geckodriver/releases/download/v0.20.0/geckodriver-v0.20.0-win32.zip</filelocation>
+                    <hash>9aa5bbdc68acc93c244a7ba5111a3858d8cbc41d</hash>
+                    <hashtype>sha1</hashtype>
+                </bitrate>
+            </version>
+        </driver>
     </windows>
     <linux>
     </linux>

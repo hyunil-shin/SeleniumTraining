@@ -4,6 +4,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
+import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -18,6 +19,7 @@ import org.openqa.selenium.safari.SafariOptions;
 
 import com.lazerycode.selenium.tests.TestProperties;
 
+import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 
@@ -25,9 +27,12 @@ public enum DriverType implements DriverSetup {
 
     FIREFOX {
         public RemoteWebDriver getWebDriverObject(DesiredCapabilities capabilities) {
+        	File fpath = new File(TestProperties.firefox_binary_path);
+        	FirefoxBinary b = new FirefoxBinary(fpath);
             FirefoxOptions options = new FirefoxOptions();
             options.merge(capabilities);
             options.setHeadless(HEADLESS);
+            options.setBinary(b);
 
             return new FirefoxDriver(options);
         }
