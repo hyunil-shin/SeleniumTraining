@@ -35,7 +35,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
 		<!--Dependency Versions -->
-		<selenium.version>3.12.0</selenium.version>
+		<selenium.version>3.14.0</selenium.version>
 		<hamcrest-all.version>1.3</hamcrest-all.version>
 		<phantomjsdriver.version>1.4.1</phantomjsdriver.version>
 		<!--Plugin Versions -->
