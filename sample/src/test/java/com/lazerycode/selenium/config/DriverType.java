@@ -42,18 +42,13 @@ public enum DriverType implements DriverSetup {
             HashMap<String, Object> chromePreferences = new HashMap<>();
             chromePreferences.put("profile.password_manager_enabled", false);
 
-            
-            if(System.getProperty("webdriver.chrome.driver") == null) {
-            	// for Eclipse
-                String chrome_driver_path = this.getDeclaringClass().getClassLoader().getResource(TestProperties.chrome_driver_path).getPath();
-                try {
-                	chrome_driver_path = java.net.URLDecoder.decode(chrome_driver_path, "UTF-8");
-            	} catch (UnsupportedEncodingException e) {
-            	}
-            	System.setProperty("webdriver.chrome.driver", chrome_driver_path);
+            String chrome_driver_path = this.getDeclaringClass().getClassLoader().getResource(TestProperties.chrome_driver_path).getPath();
+            try {
+             	chrome_driver_path = java.net.URLDecoder.decode(chrome_driver_path, "UTF-8");
+            } catch (UnsupportedEncodingException e) {
             }
-            	
-            
+            System.setProperty("webdriver.chrome.driver", chrome_driver_path);
+
             ChromeOptions options = new ChromeOptions();
             options.merge(capabilities);
             options.setHeadless(HEADLESS);
