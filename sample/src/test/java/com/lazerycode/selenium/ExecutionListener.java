@@ -47,6 +47,7 @@ public class ExecutionListener extends RunListener {
 	 * */
 	public void testStarted(Description description) throws java.lang.Exception
 	{
+		System.out.println("=================================");
 		System.out.println("Starting execution of test case : "+ description.getMethodName());
 	}
 
@@ -56,6 +57,7 @@ public class ExecutionListener extends RunListener {
 	public void testFinished(Description description) throws java.lang.Exception
 	{
 		System.out.println("Finished execution of test case : "+ description.getMethodName());
+		System.out.println("=================================");
 	}
 
 	/**

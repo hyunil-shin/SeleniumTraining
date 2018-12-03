@@ -31,7 +31,7 @@ public enum DriverType implements DriverSetup {
         	FirefoxBinary b = new FirefoxBinary(fpath);
             FirefoxOptions options = new FirefoxOptions();
             options.merge(capabilities);
-            options.setHeadless(HEADLESS);
+            options.setHeadless(TestProperties.headless);
             options.setBinary(b);
 
             return new FirefoxDriver(options);
@@ -39,14 +39,16 @@ public enum DriverType implements DriverSetup {
     },
     CHROME {
         public RemoteWebDriver getWebDriverObject(DesiredCapabilities capabilities) {
-            HashMap<String, Object> chromePreferences = new HashMap<>();
-            chromePreferences.put("profile.password_manager_enabled", false);
             System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "//" + TestProperties.chrome_driver_path);
             System.out.println(System.getProperty("user.dir") + "\\" + TestProperties.chrome_driver_path);
 
+            // 크롬 브라우져 속성
+            // - http://chromedriver.chromium.org/capabilities
+            HashMap<String, Object> chromePreferences = new HashMap<>();
+            chromePreferences.put("profile.password_manager_enabled", false);
             ChromeOptions options = new ChromeOptions();
             options.merge(capabilities);
-            options.setHeadless(HEADLESS);
+            options.setHeadless(TestProperties.headless);
             options.addArguments("--no-default-browser-check");
             // https://github.com/Codeception/CodeceptJS/issues/561
             // chrome headless 속드 개선
@@ -98,7 +100,6 @@ public enum DriverType implements DriverSetup {
         }
     };
 
-    public final static boolean HEADLESS = TestProperties.headless;
 
     @Override
     public String toString() {
