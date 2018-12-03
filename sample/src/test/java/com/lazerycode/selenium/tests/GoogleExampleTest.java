@@ -59,14 +59,11 @@ public class GoogleExampleTest extends DriverBase {
                 return d.getTitle().toLowerCase().startsWith("cheese!");
             }
         });
-       
-        
         // Should see: "cheese! - Google Search"
         System.out.println("Page title is: " + driver.getTitle());
     
-        assertTrue(driver.findElement(By.linkText("Cheese - Wikipedia")).isDisplayed());
-        //driver.findElement(By.linkText("Cheese - Wikipedia1"));
-    
+        assertTrue(driver.findElement(By.linkText("Types of cheese")).isDisplayed());
+
         // 테스트 실패
         //assertTrue(driver.findElement(By.linkText("Cheese - Wikipedia1")).isDisplayed());
     }
@@ -106,10 +103,7 @@ public class GoogleExampleTest extends DriverBase {
         });
 
         // expected: Milk - Wikipedia 
-        WebElement r = driver.findElement(By.xpath(".//*[@id='rso']/div/div/div[3]/div/div/h3"));
+        WebElement r = driver.findElement(By.cssSelector("#rso > div > div > div:nth-child(1) > div > div > div > a > h3"));
         System.out.println("result: " + r.getText());
-        
-        // Should see: "cheese! - Google Search"
-        System.out.println("Page title is: " + driver.getTitle());
     }
 }
