@@ -1,4 +1,4 @@
-package com.lazerycode.selenium.tests;
+package com.lazerycode.selenium;
 
 public class TestProperties {
 

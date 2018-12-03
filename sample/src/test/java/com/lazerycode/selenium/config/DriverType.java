@@ -17,7 +17,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.safari.SafariOptions;
 
-import com.lazerycode.selenium.tests.TestProperties;
+import com.lazerycode.selenium.TestProperties;
 
 import java.io.File;
 import java.io.UnsupportedEncodingException;

@@ -4,14 +4,12 @@ import java.util.concurrent.TimeUnit;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Rule;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 import com.lazerycode.selenium.DriverBase;
-import com.lazerycode.selenium.tests.TestProperties;
+import com.lazerycode.selenium.TestProperties;
 
 import static org.fest.assertions.api.Assertions.*;
 

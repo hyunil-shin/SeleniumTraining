@@ -1,7 +1,7 @@
 package com.lazerycode.selenium.tests.sample.basic;
 
 import com.lazerycode.selenium.DriverBase;
-import com.lazerycode.selenium.tests.TestProperties;
+import com.lazerycode.selenium.TestProperties;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 
