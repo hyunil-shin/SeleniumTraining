@@ -98,7 +98,7 @@ public enum DriverType implements DriverSetup {
         }
     };
 
-    public final static boolean HEADLESS = false;
+    public final static boolean HEADLESS = TestProperties.headless;
 
     @Override
     public String toString() {
