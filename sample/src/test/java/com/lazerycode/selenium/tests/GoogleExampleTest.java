@@ -1,4 +1,4 @@
-package com.lazerycode.selenium.tests.sample.basic;
+package com.lazerycode.selenium.tests;
 
 import com.lazerycode.selenium.DriverBase;
 
