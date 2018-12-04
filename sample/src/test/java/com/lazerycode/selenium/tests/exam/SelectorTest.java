@@ -19,7 +19,7 @@ public class SelectorTest extends DriverBase {
         driver.get(TestProperties.test_url + "/tables");
         System.out.println(driver.getCurrentUrl());
 
-        // Exmaple 2 > 마지막 행의 Web Site 찾기
+        // Exmaple 2 > 마지막 행(Conway)의 Web Site 찾기
         //WebElement element = driver.findElement();
         //System.out.println(element.getText());
     }

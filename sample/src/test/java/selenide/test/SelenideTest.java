@@ -1,11 +1,11 @@
 package selenide.test;
 
 
+import com.lazerycode.selenium.TestProperties;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
@@ -24,7 +24,7 @@ public class SelenideTest {
 	@BeforeClass
 	public static void beforeClass() throws Exception {
     	System.setProperty("selenide.browser", "chrome");
-    	String chrome_driver_path = "src/test/resources/selenium_standalone_binaries/windows/googlechrome/64bit/chromedriver.exe";
+    	String chrome_driver_path = TestProperties.chrome_driver_path;
         System.setProperty("webdriver.chrome.driver", chrome_driver_path);
     	
 		open("http://www.phptravels.net/");
@@ -38,13 +38,14 @@ public class SelenideTest {
 	public void reserveHotel() throws Exception {
 	
 		// login
-		SelenideElement nav = $(".tbar-top").should(visible);
+		SelenideElement nav = $(".navbar.navbar-default").should(visible);
+		System.out.println(nav.getText());
 		nav.$("#li_myaccount").click();
 		nav.$("#li_myaccount > ul > li:nth-child(1) > a").click();
 		$(By.name("username")).sendKeys(username);
 		$(By.name("password")).sendKeys(pw);
 		$(By.xpath("//button[contains(.,'Login')]")).click();
-		SelenideElement welcomMsg = $(By.cssSelector("#body-section > div > div.row > div > div.col-md-6.go-right.RTL > h3"));
+		SelenideElement welcomMsg = $(By.cssSelector("#body-section > div:nth-child(1) > div > div > div.col-md-6.go-right.RTL > h3"));
 		welcomMsg.should(text("Hi,"));
 		
 	

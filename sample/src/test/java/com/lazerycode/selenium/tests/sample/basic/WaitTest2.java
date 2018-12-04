@@ -24,36 +24,36 @@ public class WaitTest2 extends DriverBase {
     	driver = getDriver();
         driver.get(TestProperties.test_url + "/dynamic_loading/2");
     }
+
+    static String target = "#finish > h4";
     
     @Test
     public void willFailWhenNoWait() throws Exception {
         WebElement element = driver.findElement(By.cssSelector("#start > button"));
         element.click();
-        WebElement text = driver.findElement(By.cssSelector("#finish > h4"));
+        WebElement text = driver.findElement(By.cssSelector(target));
         System.out.println("text: " + text.getText());
         assertThat(text.getText()).contains("Hello");
     }
-    
-    
+
     @Test
-    public void willPass() throws Exception {
+    public void willPass_explicitWait() throws Exception {
         WebElement element = driver.findElement(By.cssSelector("#start > button"));
         element.click();
         (new WebDriverWait(driver, 10)).until(new ExpectedCondition<Boolean>() {
             public Boolean apply(WebDriver d) {
-            	WebElement text = driver.findElement(By.cssSelector("#finish > h4"));
+            	WebElement text = driver.findElement(By.cssSelector(target));
                 return text.getText().contains("Hello");
             }
         });
     }
     
     @Test
-    // same as willPass()
-    public void willPass2() throws Exception {
+    public void willPass_explicitWait2() throws Exception {
         WebElement element = driver.findElement(By.cssSelector("#start > button"));
         element.click();
        (new WebDriverWait(driver, 10)).until(
-    		   	ExpectedConditions.textToBePresentInElementLocated(By.cssSelector("#finish > h4"), "Hello"));
+    		   	ExpectedConditions.textToBePresentInElementLocated(By.cssSelector(target), "Hello"));
     }
   
     @Test
@@ -61,7 +61,7 @@ public class WaitTest2 extends DriverBase {
         WebElement element = driver.findElement(By.cssSelector("#start > button"));
         element.click();
        (new WebDriverWait(driver, 2)).until(
-    		   	ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#finish > h4")));
+    		   	ExpectedConditions.visibilityOfElementLocated(By.cssSelector(target)));
     }
 
 
