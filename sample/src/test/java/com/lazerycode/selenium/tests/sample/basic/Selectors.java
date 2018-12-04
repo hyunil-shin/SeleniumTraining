@@ -27,7 +27,7 @@ public class Selectors extends DriverBase {
         WebElement element = driver.findElement(By.cssSelector("#table1 > thead > tr > th.header > span"));
         System.out.println(element.getText());
         
-        // 방법 2. xpath selector
+        // 방법 2. xpath
         element = driver.findElement(By.xpath("//*[@id='table1']/thead/tr/th[1]/span"));
         System.out.println(element.getText());
         
@@ -36,6 +36,7 @@ public class Selectors extends DriverBase {
         System.out.println(element.getText());
         
         // Get list
+        System.out.println("Element List");
         List<WebElement> list = driver.findElements(By.cssSelector("#table1 > tbody > tr"));
         for(WebElement e: list) {
         	System.out.println(e.getText());
