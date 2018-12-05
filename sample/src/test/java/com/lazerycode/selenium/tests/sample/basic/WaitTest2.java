@@ -40,6 +40,7 @@ public class WaitTest2 extends DriverBase {
     public void willPass_explicitWait() throws Exception {
         WebElement element = driver.findElement(By.cssSelector("#start > button"));
         element.click();
+        // 조건을 자유롭게 지정 가능
         (new WebDriverWait(driver, 10)).until(new ExpectedCondition<Boolean>() {
             public Boolean apply(WebDriver d) {
             	WebElement text = driver.findElement(By.cssSelector(target));
@@ -52,6 +53,7 @@ public class WaitTest2 extends DriverBase {
     public void willPass_explicitWait2() throws Exception {
         WebElement element = driver.findElement(By.cssSelector("#start > button"));
         element.click();
+        // 일반적으로 많이 사용되는 조건이 api로 제공됨
        (new WebDriverWait(driver, 10)).until(
     		   	ExpectedConditions.textToBePresentInElementLocated(By.cssSelector(target), "Hello"));
     }

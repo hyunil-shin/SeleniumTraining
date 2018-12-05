@@ -41,6 +41,10 @@ public class Selectors extends DriverBase {
         for(WebElement e: list) {
         	System.out.println(e.getText());
         }
-        
+
+        // 배열 활용
+        List<WebElement> trList = driver.findElement(By.id("table1")).findElements(By.cssSelector("thead > tr > th.header"));
+        System.out.println(trList.get(0).findElement(By.cssSelector("span")).getText());
+        System.out.println(trList.get(1).findElement(By.cssSelector("span")).getText());
     }
 }
